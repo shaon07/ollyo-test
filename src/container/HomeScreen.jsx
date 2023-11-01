@@ -1,5 +1,6 @@
 import { Card, Divider } from "antd";
 import React from "react";
+import AddImageBox from "../components/AddImageBox";
 import Header from "../components/Header";
 import ImageBox from "../components/ImageBox";
 
@@ -24,6 +25,7 @@ export default function HomeScreen() {
               <ImageBox key={index} className={`img-${index+1}`} img={index+1} />
             ))
           }
+          <AddImageBox />
         </div>
       </Card>
     </div>

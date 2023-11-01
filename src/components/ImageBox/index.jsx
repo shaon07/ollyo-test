@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 import { Checkbox } from "antd";
-// import testImage from ;
 import { styles } from "./index.css";
 
-export default function ImageBox({className ="", img}) {
+export default function ImageBox({ className = "", img }) {
   const [checked, setChecked] = useState(false);
   const [showCheckBox, setShowCheckBox] = useState(false);
 
@@ -17,17 +16,18 @@ export default function ImageBox({className ="", img}) {
       className={`${styles.imageBoxWrapper} ${className}`}
       onMouseEnter={() => setShowCheckBox(true)}
       onMouseLeave={() => {
-        if(!checked) setShowCheckBox(false)
+        if (!checked) setShowCheckBox(false);
+      }}
+      onClick={() => {
+        setChecked(!checked);
       }}
     >
       {showCheckBox && (
-        <div
-          className={`${styles.checkboxWrapper}`}
-        >
+        <div className={`${styles.checkboxWrapper}`}>
           <Checkbox
-            defaultChecked={checked}
+            checked={checked}
             onChange={(e) => {
-                setChecked(e.target.checked)
+              setChecked(e.target.checked);
             }}
             className="p-2"
           />
@@ -39,7 +39,7 @@ export default function ImageBox({className ="", img}) {
         alt="img"
         width={200}
         height={200}
-        className="cursor-pointer object-cover w-full h-full"
+        className={`${styles.image}`}
       />
     </div>
   );
