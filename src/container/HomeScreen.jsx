@@ -3,14 +3,12 @@ import React from "react";
 import AddImageBox from "../components/AddImageBox";
 import Header from "../components/Header";
 import ImageBox from "../components/ImageBox";
-
-let imgCount = [];
-
-for(let i = 0; i < 10; i++) {
-  imgCount.push(i);
-}
+import useImages from "../hooks/useImages";
 
 export default function HomeScreen() {
+
+  const data = useImages();
+
   return (
     <div className="m-5">
       <Card bodyStyle={{ padding: 0 }}>
@@ -21,8 +19,8 @@ export default function HomeScreen() {
 
         <div className="p-[25px] container">
           {
-            imgCount.map((item, index) => (
-              <ImageBox key={index} className={`img-${index+1}`} img={index+1} />
+            data.images.map((image, index) => (
+              <ImageBox key={index} className={`img-${index+1}`} img={image} />
             ))
           }
           <AddImageBox />

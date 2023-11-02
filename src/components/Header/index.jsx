@@ -1,15 +1,25 @@
-import { Checkbox } from 'antd'
-import React from 'react'
-import { styles } from './index.css'
+import { Checkbox } from "antd";
+import React from "react";
+import useImages from "../../hooks/useImages";
+import { styles } from "./index.css";
 
 export default function Header() {
+  const {selectImages} = useImages();
+  const selectedImageLen = selectImages.length;
+  const isSelectedImage = selectedImageLen > 0 ? true : false;
+
   return (
     <div className={`${styles.headerWrapper}`}>
       <h2 className={`${styles.titleLeft}`}>
-        <Checkbox defaultChecked />
-        <span>1 Files Selected</span>
+        {isSelectedImage && <Checkbox defaultChecked />}
+        <span>
+          {isSelectedImage ? selectedImageLen : ""}{" "}
+          {isSelectedImage ? "Files Selected" : "Gallery"}
+        </span>
       </h2>
-      <h4 className={`${styles.titleRight}`}>Delete Files</h4>
+      <h4 className={`${styles.titleRight}`}>
+        Delete File{selectedImageLen > 1 ? "s" : ""}
+      </h4>
     </div>
-  )
+  );
 }
