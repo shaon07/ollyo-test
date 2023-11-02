@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
+  addNewImage,
   addSelectImages,
   deleteAllSelectedImage,
   removeSelectImages,
@@ -26,6 +27,10 @@ export default function useImages() {
     dispatch(toggleSelectImages(image));
   };
 
+  const handleAddNewImage = (image) => {
+    dispatch(addNewImage(image));
+  }
+
   return {
     images,
     selectImages,
@@ -33,5 +38,6 @@ export default function useImages() {
     handleRemoveSelectImages,
     handleDeleteSelectImages,
     handleToggleSelectedImages,
+    handleAddNewImage
   };
 }
