@@ -1,17 +1,37 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addSelectImages, removeSelectImages } from "../redux/slices/imageSlice";
+import {
+  addSelectImages,
+  deleteAllSelectedImage,
+  removeSelectImages,
+  toggleSelectImages,
+} from "../redux/slices/imageSlice";
 
 export default function useImages() {
   const dispatch = useDispatch();
-  const {images, selectImages} = useSelector((state) => state.imageSlice);
+  const { images, selectImages } = useSelector((state) => state.imageSlice);
 
-  const handleAddSelectImages = (imageID) => {
-    dispatch(addSelectImages(imageID))
-  }
+  const handleAddSelectImages = (image) => {
+    dispatch(addSelectImages(image));
+  };
 
-  const handleRemoveSelectImages = (imageID) => {
-    dispatch(removeSelectImages(imageID))
-  }
+  const handleRemoveSelectImages = (image) => {
+    dispatch(removeSelectImages(image));
+  };
 
-  return {images, selectImages, handleAddSelectImages, handleRemoveSelectImages}
+  const handleDeleteSelectImages = () => {
+    dispatch(deleteAllSelectedImage());
+  };
+
+  const handleToggleSelectedImages = (image) => {
+    dispatch(toggleSelectImages(image));
+  };
+
+  return {
+    images,
+    selectImages,
+    handleAddSelectImages,
+    handleRemoveSelectImages,
+    handleDeleteSelectImages,
+    handleToggleSelectedImages,
+  };
 }

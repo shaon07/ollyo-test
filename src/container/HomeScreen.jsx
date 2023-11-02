@@ -6,7 +6,6 @@ import ImageBox from "../components/ImageBox";
 import useImages from "../hooks/useImages";
 
 export default function HomeScreen() {
-
   const data = useImages();
 
   return (
@@ -18,11 +17,9 @@ export default function HomeScreen() {
         </div>
 
         <div className="p-[25px] container">
-          {
-            data.images.map((image, index) => (
-              <ImageBox key={index} className={`img-${index+1}`} img={image} />
-            ))
-          }
+          {data.images.map((image, index) => (
+            <ImageBox key={index} className={`img-${index + 1}`} img={image} />
+          ))}
           <AddImageBox />
         </div>
       </Card>

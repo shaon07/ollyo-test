@@ -4,7 +4,7 @@ import useImages from "../../hooks/useImages";
 import { styles } from "./index.css";
 
 export default function Header() {
-  const {selectImages} = useImages();
+  const {selectImages,handleDeleteSelectImages} = useImages();
   const selectedImageLen = selectImages.length;
   const isSelectedImage = selectedImageLen > 0 ? true : false;
 
@@ -17,7 +17,7 @@ export default function Header() {
           {isSelectedImage ? "Files Selected" : "Gallery"}
         </span>
       </h2>
-      <h4 className={`${styles.titleRight}`}>
+      <h4 className={`${styles.titleRight}`} onClick={handleDeleteSelectImages}>
         Delete File{selectedImageLen > 1 ? "s" : ""}
       </h4>
     </div>

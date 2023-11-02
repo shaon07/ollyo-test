@@ -5,20 +5,13 @@ import useImages from "../../hooks/useImages";
 import { styles } from "./index.css";
 
 export default function ImageBox({ className = "", img }) {
-  const {handleAddSelectImages,handleRemoveSelectImages} = useImages();
-  const [checked, setChecked] = useState(false);
+  const {handleToggleSelectedImages} = useImages();
   const [showCheckBox, setShowCheckBox] = useState(false);
 
   useEffect(() => {
-    setShowCheckBox(checked);
-
-    if(checked){
-      handleAddSelectImages(img.id)
-    } else {
-      handleRemoveSelectImages(img.id)
-    }
+    setShowCheckBox(img.checked);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [checked]);
+  }, [img]);
 
 
   return (
@@ -26,19 +19,16 @@ export default function ImageBox({ className = "", img }) {
       className={`${styles.imageBoxWrapper} ${className}`}
       onMouseEnter={() => setShowCheckBox(true)}
       onMouseLeave={() => {
-        if (!checked) setShowCheckBox(false);
+        if (!img.checked) setShowCheckBox(false);
       }}
       onClick={() => {
-        setChecked(!checked);
+        handleToggleSelectedImages({...img, checked: !img.checked});
       }}
     >
       {showCheckBox && (
         <div className={`${styles.checkboxWrapper}`}>
           <Checkbox
-            checked={checked}
-            onChange={(e) => {
-              setChecked(e.target.checked);
-            }}
+            checked={img.checked}
             className="p-2"
           />
         </div>

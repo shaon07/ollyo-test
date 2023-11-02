@@ -1,58 +1,69 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 const images = [
-    {
-      id: 1,
-      url: require("../../images/image-1.webp"),
-    },
-    {
-      id: 2,
-      url: require("../../images/image-2.webp"),
-    },
-    {
-      id: 3,
-      url: require("../../images/image-3.webp"),
-    },
-    {
-      id: 4,
-      url: require("../../images/image-4.webp"),
-    },
-    {
-      id: 5,
-      url: require("../../images/image-5.webp"),
-    },
-    {
-      id: 6,
-      url: require("../../images/image-6.webp"),
-    },
-    {
-      id: 7,
-      url: require("../../images/image-7.webp"),
-    },
-    {
-      id: 8,
-      url: require("../../images/image-8.webp"),
-    },
-    {
-      id: 9,
-      url: require("../../images/image-9.webp"),
-    },
-    {
-      id: 10,
-      url: require("../../images/image-10.webp"),
-    },
-    {
-      id: 11,
-      url: require("../../images/image-11.webp"),
-    },
-  ];
+  {
+    id: 1,
+    url: require("../../images/image-1.webp"),
+    checked: false,
+  },
+  {
+    id: 2,
+    url: require("../../images/image-2.webp"),
+    checked: false,
+  },
+  {
+    id: 3,
+    url: require("../../images/image-3.webp"),
+    checked: false,
+  },
+  {
+    id: 4,
+    url: require("../../images/image-4.webp"),
+    checked: false,
+  },
+  {
+    id: 5,
+    url: require("../../images/image-5.webp"),
+    checked: false,
+  },
+  {
+    id: 6,
+    url: require("../../images/image-6.webp"),
+    checked: false,
+  },
+  {
+    id: 7,
+    url: require("../../images/image-7.webp"),
+    checked: false,
+  },
+  {
+    id: 8,
+    url: require("../../images/image-8.webp"),
+    checked: false,
+  },
+  {
+    id: 9,
+    url: require("../../images/image-9.webp"),
+    checked: false,
+  },
+  {
+    id: 10,
+    url: require("../../images/image-10.webp"),
+    checked: false,
+  },
+  {
+    id: 11,
+    url: require("../../images/image-11.webp"),
+    checked: false,
+  },
+];
 
 const initialState = {
   images,
-  selectImages: []
-}
+  selectImages: [],
+};
 
 export const imageSlice = createSlice({
-  name: 'imageSlice',
+  name: "imageSlice",
   initialState,
   reducers: {
     addSelectImages: (state, action) => {
@@ -61,11 +72,29 @@ export const imageSlice = createSlice({
     removeSelectImages: (state, action) => {
       state.selectImages = state.selectImages.filter(
         (image) => image !== action.payload
-      )
-    }
+      );
+    },
+    deleteAllSelectedImage: (state) => {
+      const newList = state.images.filter((img) => img.checked !== true);
+      state.images = newList;
+      state.selectImages = [];
+    },
+    toggleSelectImages: (state, action) => {
+      const newImg = state.images.filter(
+        (image) => image.id !== action.payload.id
+      );
+
+      state.images = [...newImg, action.payload].sort((a, b) => a.id - b.id);
+      state.selectImages = state.images.filter((img) => img.checked === true);
+    },
   },
-})
+});
 
-export const { addSelectImages,removeSelectImages } = imageSlice.actions
+export const {
+  addSelectImages,
+  removeSelectImages,
+  deleteAllSelectedImage,
+  toggleSelectImages,
+} = imageSlice.actions;
 
-export default imageSlice.reducer
+export default imageSlice.reducer;
