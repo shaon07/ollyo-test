@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <div className={`${styles.headerWrapper}`}>
       <h2 className={`${styles.titleLeft}`}>
-        {isSelectedImage && <Checkbox defaultChecked />}
+        {isSelectedImage && <Checkbox  checked={true} />}
         <span>
           {isSelectedImage ? selectedImageLen : ""}{" "}
           {isSelectedImage ? "Files Selected" : "Gallery"}
