@@ -1,12 +1,42 @@
+import {
+  DndContext,
+  DragOverlay,
+  MouseSensor,
+  TouchSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import {
+  SortableContext,
+  arrayMove,
+  rectSortingStrategy,
+} from "@dnd-kit/sortable";
 import { Card, Divider } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import AddImageBox from "../components/AddImageBox";
+import { Grid } from "../components/Grid";
 import Header from "../components/Header";
-import ImageBox from "../components/ImageBox";
 import useImages from "../hooks/useImages";
+import { PhotoContainer } from "./PhotoContainer";
 
 export default function HomeScreen() {
   const data = useImages();
+  const [item, setItems] = useState(data.images);
+
+  const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
+
+  function handleDragEnd(event) {
+    const { active, over } = event;
+
+    if (active.id !== over.id) {
+      setItems((items) => {
+        const activeIndex = items.findIndex(({ id }) => id === active.id);
+        const overIndex = items.findIndex(({ id }) => id === over.id);
+        return arrayMove(items, activeIndex, overIndex);
+      });
+    }
+  }
 
   return (
     <div className="m-5">
@@ -16,11 +46,28 @@ export default function HomeScreen() {
           <Divider className="my-0" />
         </div>
 
-        <div className="p-[25px] container">
-          {data.images.map((image, index) => (
-            <ImageBox key={index} className={`img-${index + 1}`} img={image} />
-          ))}
-          <AddImageBox />
+        <div className="p-[25px] ">
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
+          >
+            <SortableContext items={item} strategy={rectSortingStrategy}>
+              <Grid columns={5}>
+                {item.map((img, index) => (
+                  <PhotoContainer
+                    key={img.id}
+                    url={img.url}
+                    img={img}
+                    index={index}
+                  />
+                ))}
+                <AddImageBox />
+              </Grid>
+            </SortableContext>
+
+            <DragOverlay adjustScale={true}></DragOverlay>
+          </DndContext>
         </div>
       </Card>
     </div>

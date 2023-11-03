@@ -1,46 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { forwardRef } from 'react';
 
-import { Checkbox } from "antd";
-import useImages from "../../hooks/useImages";
-import { styles } from "./index.css";
-
-export default function ImageBox({ className = "", img }) {
-  const {handleToggleSelectedImages} = useImages();
-  const [showCheckBox, setShowCheckBox] = useState(false);
-
-  useEffect(() => {
-    setShowCheckBox(img.checked);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [img]);
-
+export const ImageBox = forwardRef(({url, index, faded, style, ...props}, ref) => {
+  const inlineStyles = {
+    opacity: faded ? '0.2' : '1',
+    transformOrigin: '0 0',
+    height: index === 0 ? 410 : 200,
+    gridRowStart: index === 0 ? 'span 2' : null,
+    gridColumnStart: index === 0 ? 'span 2' : null,
+    backgroundImage: `url("${url}")`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundColor: 'grey',
+    ...style,
+  };
 
   return (
-    <div
-      className={`${styles.imageBoxWrapper} ${className}`}
-      onMouseEnter={() => setShowCheckBox(true)}
-      onMouseLeave={() => {
-        if (!img.checked) setShowCheckBox(false);
-      }}
-      onClick={() => {
-        handleToggleSelectedImages({...img, checked: !img.checked});
-      }}
-    >
-      {showCheckBox && (
-        <div className={`${styles.checkboxWrapper}`}>
-          <Checkbox
-            checked={img.checked}
-            className="p-2"
-          />
-        </div>
-      )}
-
-      <img
-        src={img.url}
-        alt="img"
-        width={200}
-        height={200}
-        className={`${styles.image}`}
-      />
-    </div>
+      <div ref={ref} style={inlineStyles} {...props} className='border-2 inline-block border-[#c7c7c7] rounded-md'>
+        <p>hello</p>
+      </div>
   );
-}
+});

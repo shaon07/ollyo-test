@@ -5,6 +5,7 @@ import {
   deleteAllSelectedImage,
   removeSelectImages,
   toggleSelectImages,
+  updateImageList,
 } from "../redux/slices/imageSlice";
 
 export default function useImages() {
@@ -31,6 +32,10 @@ export default function useImages() {
     dispatch(addNewImage(image));
   }
 
+  const handleUpdateImageList = (updatedImageList) => {
+    dispatch(updateImageList(updatedImageList));
+  }
+
   return {
     images,
     selectImages,
@@ -38,6 +43,7 @@ export default function useImages() {
     handleRemoveSelectImages,
     handleDeleteSelectImages,
     handleToggleSelectedImages,
-    handleAddNewImage
+    handleAddNewImage,
+    handleUpdateImageList
   };
 }

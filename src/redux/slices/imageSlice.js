@@ -89,7 +89,10 @@ export const imageSlice = createSlice({
     },
     addNewImage: (state, action) => {
       state.images = [...state.images, action.payload];
-    }
+    },
+    updateImageList: (state, action) => {
+      state.images = action.payload;
+    },
   },
 });
 
@@ -98,7 +101,8 @@ export const {
   removeSelectImages,
   deleteAllSelectedImage,
   toggleSelectImages,
-  addNewImage
+  addNewImage,
+  updateImageList
 } = imageSlice.actions;
 
 export default imageSlice.reducer;
