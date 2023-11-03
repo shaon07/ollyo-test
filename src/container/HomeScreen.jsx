@@ -1,11 +1,7 @@
 import {
   DndContext,
   DragOverlay,
-  MouseSensor,
-  TouchSensor,
-  closestCenter,
-  useSensor,
-  useSensors,
+  closestCenter
 } from "@dnd-kit/core";
 import {
   SortableContext,
@@ -24,17 +20,20 @@ export default function HomeScreen() {
   const data = useImages();
   const [item, setItems] = useState(data.images);
 
-  const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
 
   function handleDragEnd(event) {
+    console.log("event", event);
     const { active, over } = event;
 
-    if (active.id !== over.id) {
-      setItems((items) => {
-        const activeIndex = items.findIndex(({ id }) => id === active.id);
-        const overIndex = items.findIndex(({ id }) => id === over.id);
-        return arrayMove(items, activeIndex, overIndex);
-      });
+    if(active && over){
+      if (active.id !== over?.id) {
+        setItems((items) => {
+          const activeIndex = items.findIndex(({ id }) => id === active.id);
+          const overIndex = items.findIndex(({ id }) => id === over.id);
+  
+          return arrayMove(items, activeIndex, overIndex);
+        });
+      }
     }
   }
 
@@ -48,7 +47,6 @@ export default function HomeScreen() {
 
         <div className="p-[25px] ">
           <DndContext
-            sensors={sensors}
             collisionDetection={closestCenter}
             onDragEnd={handleDragEnd}
           >
