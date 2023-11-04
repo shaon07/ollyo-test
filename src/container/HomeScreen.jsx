@@ -19,7 +19,8 @@ export default function HomeScreen() {
   const [currentImage, setCurrentImage] = useState("");
 
   function handleDragStart(event) {
-    setCurrentImage(items[event.active.id - 1].url);
+    const activeIndex = items.findIndex(({ id }) => id === event.active.id);
+    setCurrentImage(items[activeIndex].url);
   }
 
   function handleDragCancel() {
@@ -74,14 +75,15 @@ export default function HomeScreen() {
             </SortableContext>
 
             <DragOverlay adjustScale={true}>
-              <img
-                src={
-                  currentImage ||
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8oZCT1O1uW9TKcdXDr1Ee5Rv3s3eSMoR-6A&usqp=CAU"
-                }
-                className="w-[250px] h-[200px] rounded-lg"
-                alt="currentImage"
-              />
+              {
+                currentImage && (
+                  <img
+                    src={currentImage}
+                    alt="placeholder"
+                    className="w-[250px] h-[200px] border-[#c7c7c7] rounded-md overflow-hidden"
+                  />
+                )
+              }
             </DragOverlay>
           </DndContext>
         </div>
