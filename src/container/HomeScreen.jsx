@@ -80,7 +80,7 @@ export default function HomeScreen() {
                   <img
                     src={currentImage}
                     alt="placeholder"
-                    className="w-[250px] h-[200px] border-[#c7c7c7] rounded-md overflow-hidden"
+                    className="w-[250px] h-[200px] bg-white border-2 border-[#c7c7c7] rounded-md overflow-hidden"
                   />
                 )
               }
