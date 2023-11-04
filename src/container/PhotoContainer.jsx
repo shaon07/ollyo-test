@@ -8,7 +8,6 @@ export const PhotoContainer = (props) => {
   const {
     attributes,
     listeners,
-    isDragging,
     setNodeRef,
     transform,
     transition,
