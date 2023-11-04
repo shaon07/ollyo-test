@@ -10,37 +10,29 @@ export const ImageBox = forwardRef(
       height: index === 0 ? 410 : 200,
       gridRowStart: index === 0 ? "span 2" : null,
       gridColumnStart: index === 0 ? "span 2" : null,
-      zIndex:"1",
+      zIndex: "1",
       ...style,
-    };
-
-    const handleClick = (event) => {
-      event.stopPropagation();
-      alert("clicked");
     };
 
     return (
       <div
-      ref={ref}
-      style={inlineStyles}
-      {...props}
-      className={`${styles.imageBoxWrapper} `}
-    >
-        <div className={`${styles.checkboxWrapper}`} onClick={handleClick}>
-          <Checkbox
-            checked
-            className="p-2"
-          />
+        ref={ref}
+        style={inlineStyles}
+        {...props}
+        className={`${styles.imageBoxWrapper} `}
+      >
+        <div className={`${styles.checkboxWrapper}`}>
+          <Checkbox checked={props.img.checked} className="p-2" />
         </div>
 
-      <img
-        src={url}
-        alt="img"
-        width={200}
-        height={200}
-        className={`${styles.image}`}
-      />
-    </div>
+        <img
+          src={url}
+          alt="img"
+          width={200}
+          height={200}
+          className={`${styles.image}`}
+        />
+      </div>
     );
   }
 );

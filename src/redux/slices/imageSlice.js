@@ -80,11 +80,13 @@ export const imageSlice = createSlice({
       state.selectImages = [];
     },
     toggleSelectImages: (state, action) => {
-      const newImg = state.images.filter(
-        (image) => image.id !== action.payload.id
-      );
-
-      state.images = [...newImg, action.payload].sort((a, b) => a.id - b.id);
+      const updatedArray = state.images.map(item => {
+        if (item.id === action.payload) {
+          return { ...item, checked: !item.checked };
+        }
+        return item;
+      });
+      state.images = updatedArray;
       state.selectImages = state.images.filter((img) => img.checked === true);
     },
     addNewImage: (state, action) => {

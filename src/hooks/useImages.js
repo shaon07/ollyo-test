@@ -24,8 +24,8 @@ export default function useImages() {
     dispatch(deleteAllSelectedImage());
   };
 
-  const handleToggleSelectedImages = (image) => {
-    dispatch(toggleSelectImages(image));
+  const handleToggleSelectedImages = (imageID) => {
+    dispatch(toggleSelectImages(imageID));
   };
 
   const handleAddNewImage = (image) => {

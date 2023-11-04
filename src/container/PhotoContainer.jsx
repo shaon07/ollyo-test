@@ -23,6 +23,7 @@ export const PhotoContainer = (props) => {
     <ImageBox
       ref={setNodeRef}
       style={style}
+      img={props.img}
       {...props}
       {...attributes}
       {...listeners}
