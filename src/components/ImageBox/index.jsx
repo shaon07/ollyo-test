@@ -14,15 +14,17 @@ export const ImageBox = forwardRef(
       ...style,
     };
 
+    const isChecked = props.img.checked;
+
     return (
       <div
         ref={ref}
         style={inlineStyles}
         {...props}
-        className={`${styles.imageBoxWrapper} `}
+        className={`${styles.imageBoxWrapper} ${isChecked ? "active":"normal"}`}
       >
-        <div className={`${styles.checkboxWrapper}`}>
-          <Checkbox checked={props.img.checked} className="p-2" />
+        <div className={`${styles.checkboxWrapper} `}>
+          <Checkbox checked={isChecked} className="p-2 checkbox" />
         </div>
 
         <img

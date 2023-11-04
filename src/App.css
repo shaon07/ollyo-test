@@ -12,3 +12,19 @@
   grid-column: 1/ 3;
   grid-row: 1/3;
 }
+
+.checkbox {
+  display: none;
+}
+
+.active .checkbox {
+  display: block !important;
+}
+
+.active:hover .checkbox {
+  display: block !important;
+}
+
+.normal:hover .checkbox {
+  display: block !important;
+}
