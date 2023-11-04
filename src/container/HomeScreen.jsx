@@ -5,7 +5,7 @@ import {
   rectSortingStrategy,
 } from "@dnd-kit/sortable";
 import { Card, Divider } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import AddImageBox from "../components/AddImageBox";
 import { Grid } from "../components/Grid";
 import Header from "../components/Header";
@@ -15,6 +15,16 @@ import { PhotoContainer } from "./PhotoContainer";
 export default function HomeScreen() {
   const data = useImages();
   const items = data.images;
+
+  const [currentImage, setCurrentImage] = useState("");
+
+  function handleDragStart(event) {
+    setCurrentImage(items[event.active.id - 1].url);
+  }
+
+  function handleDragCancel() {
+    setCurrentImage("");
+  }
 
   function handleDragEnd(event) {
     const { active, over } = event;
@@ -30,6 +40,8 @@ export default function HomeScreen() {
         data.handleUpdateImageList(arrayMove(items, activeIndex, overIndex));
       }
     }
+
+    setCurrentImage("");
   }
 
   return (
@@ -44,6 +56,8 @@ export default function HomeScreen() {
           <DndContext
             collisionDetection={closestCenter}
             onDragEnd={handleDragEnd}
+            onDragStart={handleDragStart}
+            onDragCancel={handleDragCancel}
           >
             <SortableContext items={items} strategy={rectSortingStrategy}>
               <Grid columns={5}>
@@ -59,7 +73,16 @@ export default function HomeScreen() {
               </Grid>
             </SortableContext>
 
-            <DragOverlay adjustScale={true}></DragOverlay>
+            <DragOverlay adjustScale={true}>
+              <img
+                src={
+                  currentImage ||
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8oZCT1O1uW9TKcdXDr1Ee5Rv3s3eSMoR-6A&usqp=CAU"
+                }
+                className="w-[250px] h-[200px] rounded-lg"
+                alt="currentImage"
+              />
+            </DragOverlay>
           </DndContext>
         </div>
       </Card>
