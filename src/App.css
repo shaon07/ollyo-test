@@ -17,6 +17,10 @@
   display: none;
 }
 
+.active .cardWrapper {
+  background-color: #2c2c2c85 !important;
+}
+
 .active .checkbox {
   display: block !important;
 }

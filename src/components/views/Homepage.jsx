@@ -6,13 +6,14 @@ import { PhotoContainer } from "../../container/PhotoContainer";
 import AddImageBox from "../AddImageBox";
 import { Grid } from "../Grid";
 import Header from "../Header";
+import { styles } from "./index.css";
 
 export default function HomeViews({
   items,
   currentImage,
   handleDragEnd = () => {},
   handleDragStart = () => {},
-  handleDragCancel = () => {}
+  handleDragCancel = () => {},
 }) {
   return (
     <div className="m-5">
@@ -48,7 +49,7 @@ export default function HomeViews({
                 <img
                   src={currentImage}
                   alt="placeholder"
-                  className="w-[250px] h-[200px] bg-white border-2 border-[#c7c7c7] rounded-md overflow-hidden"
+                  className={`${styles.placeholderImage}`}
                 />
               )}
             </DragOverlay>

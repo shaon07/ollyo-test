@@ -23,7 +23,7 @@ export const ImageBox = forwardRef(
         {...props}
         className={`${styles.imageBoxWrapper} ${isChecked ? "active":"normal"}`}
       >
-        <div className={`${styles.checkboxWrapper} `}>
+        <div className={`${styles.checkboxWrapper} cardWrapper`}>
           <Checkbox checked={isChecked} className="p-2 checkbox" />
         </div>
 
