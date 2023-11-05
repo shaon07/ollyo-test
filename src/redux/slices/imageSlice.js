@@ -66,14 +66,6 @@ export const imageSlice = createSlice({
   name: "imageSlice",
   initialState,
   reducers: {
-    addSelectImages: (state, action) => {
-      state.selectImages = [...state.selectImages, action.payload];
-    },
-    removeSelectImages: (state, action) => {
-      state.selectImages = state.selectImages.filter(
-        (image) => image !== action.payload
-      );
-    },
     deleteAllSelectedImage: (state) => {
       const newList = state.images.filter((img) => img.checked !== true);
       state.images = newList;

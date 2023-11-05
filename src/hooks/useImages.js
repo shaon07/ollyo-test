@@ -1,9 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   addNewImage,
-  addSelectImages,
   deleteAllSelectedImage,
-  removeSelectImages,
   toggleSelectImages,
   updateImageList,
 } from "../redux/slices/imageSlice";
@@ -11,14 +9,6 @@ import {
 export default function useImages() {
   const dispatch = useDispatch();
   const { images, selectImages } = useSelector((state) => state.imageSlice);
-
-  const handleAddSelectImages = (image) => {
-    dispatch(addSelectImages(image));
-  };
-
-  const handleRemoveSelectImages = (image) => {
-    dispatch(removeSelectImages(image));
-  };
 
   const handleDeleteSelectImages = () => {
     dispatch(deleteAllSelectedImage());
@@ -39,8 +29,6 @@ export default function useImages() {
   return {
     images,
     selectImages,
-    handleAddSelectImages,
-    handleRemoveSelectImages,
     handleDeleteSelectImages,
     handleToggleSelectedImages,
     handleAddNewImage,
